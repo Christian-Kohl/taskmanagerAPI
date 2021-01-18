@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
+	"taskmanagerAPI/dto"
 )
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
