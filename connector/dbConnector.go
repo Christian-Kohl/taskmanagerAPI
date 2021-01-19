@@ -22,7 +22,5 @@ func Connect() *sql.DB {
 		panic(err.Error())
 	}
 
-	defer db.Close()
-
 	return db
 }
