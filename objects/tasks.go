@@ -1,20 +1,22 @@
 package objects
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
+	"taskmanagerAPI/connector"
 	"taskmanagerAPI/dto"
 )
+
+var db = connector.Connect()
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var posts []Post
+	var posts []dto.Post
 
 	result, err := db.Query("SELECT task_id, task_name from tasks")
 	if err != nil {
@@ -24,7 +26,7 @@ func GetPosts(w http.ResponseWriter, r *http.Request) {
 	defer result.Close()
 
 	for result.Next() {
-		var post Post
+		var post dto.Post
 		err := result.Scan(&post.Task_id, &post.Task_name)
 		if err != nil {
 			panic(err.Error())
@@ -67,7 +69,7 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer result.Close()
-	var post Post
+	var post dto.Post
 	for result.Next() {
 		err := result.Scan(&post.Task_id, &post.Task_name)
 		if err != nil {

@@ -16,11 +16,13 @@ var d *sql.DB
 func main() {
 }
 
-func Connect() {
+func Connect() *sql.DB {
 	db, err := sql.Open("mysql", "testuser:TestUser1!@tcp(127.0.0.1:3306)/tasks")
 	if err != nil {
 		panic(err.Error())
 	}
 
 	defer db.Close()
+
+	return db
 }
