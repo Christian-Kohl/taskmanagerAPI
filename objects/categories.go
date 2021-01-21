@@ -102,7 +102,7 @@ func UpdateCategory(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Category %s was updated", params["category"])
 }
 
-func DeleteCategories(w http.ResponseWriter, r *http.Request) {
+func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	stmt, err := db.Prepare("DELETE FROM categories WHERE category = ?")
