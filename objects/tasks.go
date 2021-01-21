@@ -7,11 +7,13 @@ import (
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
-	"taskmanagerAPI/connector"
 	"taskmanagerAPI/dto"
 )
 
-var db = connector.Connect()
+type Post struct {
+	Task_id   string `json:"task_id"`
+	Task_name string `json:"task_name"`
+}
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
